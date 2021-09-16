@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { SearchForm } from "./Form";
+import { SearchForm } from "./SearchForm";
 
 ReactDOM.render(
   <React.StrictMode>

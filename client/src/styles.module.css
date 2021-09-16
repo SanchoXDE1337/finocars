@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0.35em 12% 0;
+}
+
+.dataContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 24px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: papayawhip;
+  border: 2px solid #000;
+  box-shadow: 0 0 42px 16px rgba(34, 60, 80, 0.2);
+  padding: 12px;
+}
+
+@media screen and (max-width: 1100px) {
+  .wrapper {
+    padding: 0 24px;
+  }
+  .dataContainer {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 12px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .wrapper {
+    padding: 0 12px;
+  }
+  .dataContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
