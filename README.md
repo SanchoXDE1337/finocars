@@ -2,28 +2,28 @@
 
 ## Как запустить проект локально
 
-(в данном git-репозитории отсутствует обученная модель, предсказывающая стоимость авто)
+(в данном git-репозитории отсутствует обученная модель, предсказывающая стоимость авто. Нужно скачать её по [ссылке](https://cloud.mail.ru/public/MUcd/CbkWd2QCv) и добавить папку model в корневую директорию проекта)
 
-### Создать виртуальное окружение в директории проекта и установить зависимости 
+### Создать виртуальное окружение в директории проекта и установить зависимости
 
-```$ python3 -m venv venv```
+`$ python3 -m venv venv`
 
-```$ source venv/bin/activate```
+`$ source venv/bin/activate`
 
-```$ pip install -r requirements.txt```
+`$ pip install -r requirements.txt`
 
-```$ deactivate```
+`$ deactivate`
 
 ### Перейти в директорию "client", установить зависимости и собрать react-приложение
 
-```$ cd client/```
+`$ cd client/`
 
-```$ npm i```
+`$ npm i`
 
-```$ npm run build```
+`$ npm run build`
 
 ### Запустить сервер
 
-```$ npm run start-api```
+`$ npm run start-api`
 
 ### Открыть в браузере http://127.0.0.1:5000
