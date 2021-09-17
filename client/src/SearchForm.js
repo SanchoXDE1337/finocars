@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Formik, Form } from 'formik';
-import { Box, Button, Modal, TextField, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Modal,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   bodyOptions,
@@ -26,6 +33,7 @@ export const SearchForm = () => {
   const handleClose = () => setOpen(false);
 
   const onSubmit = async (values) => {
+    console.log(values)
     const { data } = await axios.post('/api/price', values);
     console.log(data.price);
     setPrice(data.price);
@@ -36,6 +44,9 @@ export const SearchForm = () => {
     <div className={classes.wrapper}>
       <Typography variant="h4" gutterBottom component="div">
         Оценка автомобиля
+      </Typography>
+      <Typography variant="overline" gutterBottom component="div" color="textSecondary">
+        От корректности введенных данных зависит точность определения стоимости автомобиля
       </Typography>
       <Formik
         initialValues={initialValues}
@@ -48,6 +59,7 @@ export const SearchForm = () => {
           setFieldValue,
           touched,
           errors,
+          isSubmitting,
         }) => (
           <Form>
             <div className={classes.dataContainer}>
@@ -235,7 +247,7 @@ export const SearchForm = () => {
                   <TextField
                     {...params}
                     margin="normal"
-                    label="Коробка передач"
+                    label="Трансмиссия"
                     variant="outlined"
                     name="transmission"
                     error={touched.transmission && Boolean(errors.transmission)}
@@ -333,8 +345,13 @@ export const SearchForm = () => {
                 color="primary"
                 type="submit"
                 fullWidth
+                disabled={isSubmitting}
               >
-                Оценить
+                {isSubmitting ? (
+                  <CircularProgress color="secondary" size={24} />
+                ) : (
+                  'Оценить'
+                )}
               </Button>
             </div>
           </Form>
@@ -343,7 +360,10 @@ export const SearchForm = () => {
       <Modal open={open} onClose={handleClose}>
         <Box className={classes.modal}>
           <Typography variant="h5" gutterBottom component="div">
-            Цена авто: {typeof price === 'string' ? price : price + ' рублей'}
+            Стоимость автомобиля:
+          </Typography>
+          <Typography variant="h4" gutterBottom component="div">
+            {typeof price === 'string' ? price : price + ' рублей'}
           </Typography>
         </Box>
       </Modal>

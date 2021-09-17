@@ -3,6 +3,10 @@ import joblib
 from flask import Flask
 from flask import request
 
+rf = joblib.load("./model/random_forest_regressor.joblib")
+mms = joblib.load("./model/mms.joblib")
+
+
 app = Flask(__name__ 
     ,static_folder='client/build',static_url_path='/')
 
@@ -12,17 +16,16 @@ def serve():
 
 @app.route('/api/price',methods = ['POST'])
 def price():
-    raw_data = pd.read_csv('./model/for_new_data.csv')
-    rf = joblib.load("./model/random_forest.joblib")
-    mms = joblib.load("./model/mms.joblib")
 
     request_data = request.get_json()
+
+    raw_data = pd.read_csv('./model/for_data.csv')
 
     for key in request_data:
             if key == 'year' or key == 'mileage' or key == 'engine_volume' or key == 'engine_power' or key ==  'owners_count':
                 raw_data[key] = request_data[key]
             else:
-                raw_data[request_data[key]] = 1
+                raw_data[key+'_'+request_data[key]] = 1
 
     #теперь нормализуем данные
     raw_data[['year','mileage', 'engine_volume', 'engine_power', 'owners_count']] = mms.transform(raw_data[['year','mileage', 'engine_volume', 'engine_power', 'owners_count']])
