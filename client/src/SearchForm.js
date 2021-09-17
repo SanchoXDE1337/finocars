@@ -33,9 +33,7 @@ export const SearchForm = () => {
   const handleClose = () => setOpen(false);
 
   const onSubmit = async (values) => {
-    console.log(values)
     const { data } = await axios.post('/api/price', values);
-    console.log(data.price);
     setPrice(data.price);
     handleOpen();
   };
